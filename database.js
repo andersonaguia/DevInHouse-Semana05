@@ -1,33 +1,39 @@
-export class Produto{
-    constructor(nm, vlr, estoque, qtd){
-        this.nome = nm;
-        this.preco = vlr;
-        this.emEstoque = estoque;
-        this.quantidade = qtd;
+export class Produto {
+    nome;
+    preco;
+    emEstoque;
+    quantidade;
+  
+    constructor(nome, preco, emEstoque, quantidade) {
+      this.nome = nome;
+      this.preco = preco;
+      this.emEstoque = emEstoque;
+      this.quantidade = quantidade;
     }
 }
 
-export class Pedido{    
-    constructor(num, cliente){
-        this.numeroPedido = num;
-        this.dataPedido = new Date().toLocaleDateString();
-        this.estaPago = false;
-        this.listaProdutos = [];
-        this.nomeCliente = cliente;
-    }
+export class Pedido {
+  constructor(numPedido, nomeCliente) {
+    this.numeroPedido = numPedido;
+    this.nomeCliente = nomeCliente;
+    this.dataPedido = new Date().toLocaleDateString();
+    this.estaPago = false;
+    this.listaProdutos = [];
+  }
 
-    set adicionarProduto(produto){
-        if(produto instanceof Object){
-            this.listaProdutos.push(produto);
-        }
+  adicionarProduto(produto) {
+    const ehProduto = produto instanceof Produto;
+    if (ehProduto) {
+      this.listaProdutos.push(produto);
     }
+  }
 
-    calcularTotal() {    
-        let total = 0;
-        this.listaProdutos.forEach((produto) => {
-          total = total + produto.preco * produto.quantidade;
-        });
-        return total;
-      }
+  calcularTotal() {
+    let total = 0;
+    this.listaProdutos.forEach((produto) => {
+      total = total + produto.preco * produto.quantidade;
+    });
+    return total;
+  }
 }
 
