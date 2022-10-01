@@ -73,3 +73,16 @@ const pedidosEl = document.getElementById("pedidos");
 pedidos.forEach((pedido) => {
   pedidosEl.appendChild(elementPedido(pedido));
 });
+
+console.log("Promise")
+
+const sleep = (valor) => {
+  return new Promise((res, rej) => {
+    setTimeout(() => res(valor), 3000)
+  })
+}
+
+sleep("Olá mundo")
+  .then((res) => {
+    console.log(res)
+  })
